@@ -1,0 +1,17 @@
+<%= simple_form_for option_product,url: url, html: {class: 'form-horizontal'} do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :title %>
+    <%= f.input :price,as: :integer %>
+    <%= f.input :weight,as: :integer %>
+    <%= f.input :size,as: :integer %>
+    <%= f.hidden_field :category_id,as: :integer, value: product.category.id%>
+    <% if option_product.thumb? %>
+    <%= image_tag option_product.thumb, width: '70' %>
+    <%= link_to 'Change photo',admin_new_product_thumb_path(product),remote: true %>
+    <div class="file-input"></div>
+    <%else%>
+    <%= f.input :thumb,as: :file,required: false %>
+    <%end%>
+    
+    <%= f.button :submit, class: 'btn btn-success' %>
+<%end %>

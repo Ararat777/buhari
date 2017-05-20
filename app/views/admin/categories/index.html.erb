@@ -1,0 +1,29 @@
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Категории</h3>
+    
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered">
+        <thead>
+          <td>Название категории</td>
+          <td>Количество товаров</td>
+          <td>Действия</td>
+        </thead>
+        <tbody>
+          <% @categories.each do |item| %>
+          <tr>
+            
+            <td>Категория: <%= item.title.capitalize %></td>
+            <td><%= item.products.length %></td>
+            <td><%= link_to 'Изменить',edit_admin_category_path(item) %> | <%= link_to 'Удалить', admin_category_path(item), method: :delete %></td>
+          </tr>
+          <%end%>
+        </tbody>
+    </table>
+    <p class="text-primary"><%= link_to "Добавить", new_admin_category_path %></p>
+  </div>
+</div>

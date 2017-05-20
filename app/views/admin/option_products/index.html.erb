@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Опционные товары</h3>
+    
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered">
+        <thead>
+          <td>Изображение товара</td>
+          <td>Название товара</td>
+          <td>Цена</td>
+          <td>Вес</td>
+          <td>Размер</td>
+          <td>Действия</td>
+        </thead>
+        <tbody>
+          <% @option_products.each do |item| %>
+          <tr>
+            <td><%= image_tag(item.thumb? ? item.thumb : '/assets/noimage.jpg',width: '70')%></td>
+            <td><%= item.title.capitalize %></td>
+            <td><%= item.price %></td>
+            <td><%= item.weight %></td>
+            <td><%= item.size %></td>
+            <td><%= link_to 'Изменить',edit_admin_product_option_product_path(@product,item) %> | <%= link_to 'Удалить', admin_product_option_product_path(@product,item), method: :delete %></td>
+          </tr>
+          <%end%>
+        </tbody>
+    </table>
+    <p class="text-primary"><%= link_to "Добавить", new_admin_product_option_product_path  %></p>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Товары</h3>
+    
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered">
+        <thead>
+          <td>Изображение товара</td>
+          <td>Название товара</td>
+          <td>Описание товара</td>
+          <td>Опционные товары</td>
+          <td>Цена</td>
+          <td>Вес</td>
+          <td>Размер</td>
+          <td>Статус</td>
+          <td>Статус синхронизации</td>
+          <td>Действия</td>
+        </thead>
+        <tbody>
+          <% @products.each do |item| %>
+          <tr>
+            
+            <td><%= image_tag(item.thumb? ? item.thumb : '/assets/noimage.jpg',width: '70')%></td>
+            <td><%= item.title.capitalize %></td>
+            <td><%= item.description %></td>
+            <td>
+              <%if item.option_products.length > 0 %>
+                <% item.option_products.each do |option_item| %>
+                  | <%= option_item.title %>
+                <%end%>
+                <p><%= link_to 'Просмотреть', admin_product_option_products_path(item) %></p>
+              <%else%>
+                <p><%= link_to 'Добавить', new_admin_product_option_product_path(item) %></p>
+              <%end%>
+            </td>
+            <td><%= item.price %></td>
+            <td><%= item.weight %></td>
+            <td><%= item.size %></td>
+            <td><%= item.active? ? 'Включен' : 'Отключен' %></td>
+            <td><%= item.status %></td>
+            <td><%= link_to 'Изменить',edit_admin_product_path(item) %> | <%= link_to 'Удалить', admin_product_path(item), method: :delete %></td>
+          </tr>
+          <%end%>
+        </tbody>
+    </table>
+    <p class="text-primary"><%= link_to "Добавить", new_admin_product_path %></p>
+  </div>
+</div>

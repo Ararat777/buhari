@@ -1,0 +1,79 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ 
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+*{
+  box-sizing: border-box;
+}
+.admin-login{
+  width: 25%;
+  
+  position: relative;
+  margin: auto;
+  background-color: lightblue;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 10%;
+  .input-group{
+    display: block;
+    .form-control{
+      border-radius: 5px;
+    }
+  }
+  .input-group-btn{
+    .btn{
+      border-radius: 5px;
+      margin: 0;
+    }
+  }
+}
+
+.navbar-inverse{
+  padding: 0 50px;
+  background-color: lightblue;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 1px 5px #333333;
+  .navbar-nav li > a{
+    color: #333333;
+    font-weight: 600;
+  }
+  .navbar-nav li > a:hover{
+    color: white;
+  }
+  
+  .navbar-header a{
+    color: #333333;
+    
+  }
+}
+.content{
+  padding: 20px 50px;
+}
+
+.table tbody tr:hover{
+  background-color: lightblue;
+}
+
+#mainwrap{
+  position: relative;
+  .row{
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
