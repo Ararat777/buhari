@@ -2,8 +2,14 @@ class Admin::ProductsController < AdminController
   before_action :load_categories,only: [:new,:create,:edit,:update]
   before_action :get_product,only: [:show,:edit,:update,:destroy]
   def index
-    @products = Product.all
+      if params[:filter]
+        @filter_params = filter_products_params
+        @products = Product.where(@filter_params)
+      else
+        @products = Product.all
+      end
   end
+  
   def new
     @product = Product.new
   end
@@ -52,6 +58,14 @@ class Admin::ProductsController < AdminController
   
   
   private
+  
+  def filter_products_params
+    hh = {}
+    params[:filter].each do |k,v|
+      hh[k.to_sym] = v
+    end
+    hh
+  end
   
   def load_categories
     @categories = Category.all

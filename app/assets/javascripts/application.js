@@ -15,3 +15,15 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).ready(function(){
+  $('.filter-form').submit(function(){
+    $('.filter-form :input').each(function(){
+      if($(this).val() == ''){
+        $(this).prop('name', '');
+      }   
+    });
+  });
+  
+});
+  

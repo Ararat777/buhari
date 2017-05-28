@@ -1,12 +1,24 @@
 
 
-
+  
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Товары</h3>
     
   </div>
   <div class="panel-body">
+   <div class="actions">
+     <div class="pull-left">
+       <%= form_for(:filter,url: admin_products_path,html: {class: 'form-inline filter-form'},enforce_utf8: false,method: :get) do |f| %>
+         <%= f.label :category,"Категория" %>
+         <%= f.select(:category_id,options_for_select(Category.all.collect{|c| [c.title, c.id]},selected_param(:category_id)),{include_blank: true},{class: 'form-control'}) %>
+         <%= f.label :status,'Статус' %>
+         <%= f.select(:active,options_for_select([['Включен','true'],['Выключен','false']],selected_param(:active)),{include_blank: true},{class: 'form-control'}) %>
+         <%= f.submit 'Фильтр',name: nil,class: 'btn btn-primary' %>
+       <%end%>
+     </div>
+     <p class="pull-right"><%= link_to "Новый товар", new_admin_product_path,class: 'btn btn-primary'%></p>
+   </div>
     <table class="table table-bordered">
         <thead>
           <td>Изображение товара</td>
@@ -47,6 +59,6 @@
           <%end%>
         </tbody>
     </table>
-    <p class="text-primary"><%= link_to "Добавить", new_admin_product_path %></p>
+    
   </div>
 </div>

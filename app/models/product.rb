@@ -15,9 +15,9 @@ class Product < ApplicationRecord
   
   def set_status
     if self.new_record?
-      self[:status] = 'Новый'
+      self[:status] = 'New'
     else
-      self[:status] = 'Обновленный'
+      self[:status] = 'Updated'
     end
   end
   
