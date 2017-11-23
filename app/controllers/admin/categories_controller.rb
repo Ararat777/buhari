@@ -39,7 +39,7 @@ class Admin::CategoriesController < AdminController
   
   private
   def category_params
-    params.require(:category).permit(:title,:meta_title,:meta_description,:meta_keywords)
+    params.require(:category).permit(:title,:seo_url,:meta_title,:meta_description,:meta_keywords)
   end
   
   def get_category

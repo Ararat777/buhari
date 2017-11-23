@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518121642) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20171117151830) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -24,12 +21,12 @@ ActiveRecord::Schema.define(version: 20170518121642) do
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.integer  "current_sign_in_ip"
+    t.integer  "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "categories", force: :cascade do |t|
@@ -52,8 +49,21 @@ ActiveRecord::Schema.define(version: 20170518121642) do
     t.integer  "category_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["category_id"], name: "index_option_products_on_category_id", using: :btree
-    t.index ["product_id"], name: "index_option_products_on_product_id", using: :btree
+    t.index ["category_id"], name: "index_option_products_on_category_id"
+    t.index ["product_id"], name: "index_option_products_on_product_id"
+  end
+
+  create_table "order_deliveries", force: :cascade do |t|
+    t.string   "street"
+    t.string   "number"
+    t.string   "room"
+    t.string   "name"
+    t.string   "phone"
+    t.text     "comment"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_deliveries_on_order_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -66,8 +76,8 @@ ActiveRecord::Schema.define(version: 20170518121642) do
     t.integer  "order_id"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
-    t.index ["product_type", "product_id"], name: "index_order_items_on_product_type_and_product_id", using: :btree
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_type", "product_id"], name: "index_order_items_on_product_type_and_product_id"
   end
 
   create_table "order_statuses", force: :cascade do |t|
@@ -81,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170518121642) do
     t.integer  "order_status_id"
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.index ["order_status_id"], name: "index_orders_on_order_status_id", using: :btree
+    t.index ["order_status_id"], name: "index_orders_on_order_status_id"
   end
 
   create_table "product_images", force: :cascade do |t|
@@ -89,7 +99,7 @@ ActiveRecord::Schema.define(version: 20170518121642) do
     t.integer  "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_product_images_on_product_id", using: :btree
+    t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -104,7 +114,7 @@ ActiveRecord::Schema.define(version: 20170518121642) do
     t.string   "thumb"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.index ["category_id"], name: "index_products_on_category_id", using: :btree
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
 end

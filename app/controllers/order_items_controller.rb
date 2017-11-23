@@ -2,16 +2,23 @@ class OrderItemsController < ApplicationController
   def create
     
     @order = current_order
-    @order_item = @order.order_items.new(order_params)
-    
-    if @order.save
-      @order_items = @order.order_items
-      session[:order_id] = @order.id
-      @session = session.inspect
-      flash[:success] = 'Item added'
+    if @order_item = @order.order_items.find_by(:product_id => order_params[:product_id])
+      @order_item.quantity += 1
+      @order_item.save
+      respond_to do |format|
+        format.js{}
+      end
     else
-      flash[:error] = 'smth wrong'
-      render :js => "alert(#{flash[:error]})"
+      @order_item = @order.order_items.new(order_params)
+      if @order.save
+        @order_items = @order.order_items
+        session[:order_id] = @order.id
+        respond_to do |format|
+          format.js{}
+        end
+      else
+        render :js => "alert(#{flash[:error]})"
+      end
     end
   end
   def update
@@ -23,8 +30,15 @@ class OrderItemsController < ApplicationController
   def destroy
     @order = current_order
     @order_item = @order.order_items.find(params[:id])
-    @order_item.destroy
-    @order_items = @order.order_items
+    if @order_item.quantity > 1
+      @order_item.quantity -= 1
+      @order_item.save
+    else
+      @order_item.destroy
+    end
+    respond_to do |format|
+      format.js{}
+    end
   end
   
   private

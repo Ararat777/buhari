@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root "store#index"
   resources :products, only: [:index,:show], path: 'products/:category'
   resources :order_items, only: [:create, :update,:destroy]
+  resources :order_deliveries, only: [:new,:create]
   resource :cart, only: [:show]
   namespace :admin do
     resources :products, except: [:show] do

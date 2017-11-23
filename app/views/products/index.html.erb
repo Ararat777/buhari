@@ -1,0 +1,29 @@
+<div class="products-container">
+  <div class="container">
+    <h2 class="text-center"><%= @category.title %></h2>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="row">
+          <% @products.each do |item| %>
+          <%= form_for :order_item,url: order_items_path, remote:true do |f|%>
+            <%= f.hidden_field :quantity,value: '1' %>
+            <%= f.hidden_field :product_id, value: item.id %>
+            
+            <div class="col-md-4">
+              <%= f.button class: "product-box" do %>
+                <h4><%= "#{item.title} #{item.size}см"%></h4>
+                <span><%= item.price %>грн</span>
+              <% end %>
+            </div>
+          <%end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="cart-box">
+          <%= render 'cart' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

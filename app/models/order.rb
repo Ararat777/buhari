@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_items
+  has_one :order_delivery
   belongs_to :order_status
   before_create :set_order_status
   before_save :update_total_price

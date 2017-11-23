@@ -17,4 +17,4 @@
 
     Category.delete_all
     Category.create!(:title => 'Пицца',:seo_url => 'pizza')
-    Category.create!(:title => 'Хачапури',:seo_url => 'khachapuri')
+    
